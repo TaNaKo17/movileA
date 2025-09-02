@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             binding.text.setText(R.string.text);
         });
         prefDataStore = PrefDataStore.getInstance(this);
+        prefDataStore.getString("name")
+                .ifPresent(name -> binding.text.setText(name));
 
 
 
