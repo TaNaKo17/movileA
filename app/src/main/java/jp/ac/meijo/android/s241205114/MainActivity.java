@@ -30,16 +30,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
         binding.button.setOnClickListener(view -> {
             var text = binding.editTextText.getText().toString();
             binding.text.setText(R.string.text);
         });
         prefDataStore = PrefDataStore.getInstance(this);
-        prefDataStore.getString("name")
-                .ifPresent(name -> binding.text.setText(name));
-
-
 
 
         binding.saveButton.setOnClickListener(view -> {
@@ -64,10 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 // テキストが更新されたあとに呼ばれる
                 binding.text.setText(editable.toString());
             }
+
         });
 
 
-
-
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        prefDataStore.getString("name")
+                .ifPresent(name -> binding.text.setText(name));
     }
 }
